@@ -1,33 +1,41 @@
-import * as vscode from 'vscode';
-import { getCommands } from './configuration';
-import { showCommandsPick } from './pick';
-import { executeCommand } from './terminal';
+import * as vscode from "vscode";
+import { getCommands } from "./configuration";
+import { showCommandsPick } from "./pick";
+import { executeCommand } from "./terminal";
+
+const commandName = "run-command.run-command";
+const statusBarName = "$(terminal-view-icon) Run";
 
 export function activate(context: vscode.ExtensionContext) {
-	let commandRunner = vscode.commands.registerCommand('run-command.run-command', runCommand);
-	context.subscriptions.push(commandRunner);
+  addCommand(context);
+  addStatusBarItem(context);
+}
+
+function addCommand(context: vscode.ExtensionContext) {
+  const commandRunner = vscode.commands.registerCommand(
+    commandName,
+    runCommand
+  );
+
+  context.subscriptions.push(commandRunner);
+}
+
+function addStatusBarItem(context: vscode.ExtensionContext) {
+  const statusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Left
+  );
+
+  statusBarItem.command = commandName;
+  statusBarItem.text = statusBarName;
+  context.subscriptions.push(statusBarItem);
+  statusBarItem.show();
 }
 
 async function runCommand() {
-	const commands = getCommands();
+  const commands = getCommands();
+  const pickedCommand = await showCommandsPick(commands);
 
-	const pickedCommand = await showCommandsPick(commands);
-
-	if (!pickedCommand) {
-		return;
-	}
-
-	executeCommand(pickedCommand);
-}
-
-export function deactivate() {
-	const commandNames = getCommands().map(command => {
-		return command.name;
-	});
-
-	for (const terminal of vscode.window.terminals) {
-		if (commandNames.includes(terminal.name)) {
-			terminal.dispose();
-		}
-	}
+  if (pickedCommand) {
+    executeCommand(pickedCommand);
+  }
 }
