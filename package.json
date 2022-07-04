@@ -21,7 +21,42 @@
 				"command": "command-runner.run-command",
 				"title": "Command Runner: Run Command"
 			}
-		]
+		],
+		"keybindings": [
+			{
+				"command": "command-runner.run-command",
+				"key": "ctrl+shift+t",
+				"mac": "ctrl+shift+t"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Command Runner Configuration",
+			"properties": {
+				"my-command-runner.commands": {
+					"type": "array",
+					"items": {
+						"type": [
+							"object"
+						],
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "Name for the command and of the terminal."
+							},
+							"command": {
+								"type": "string",
+								"description": "The command to be executed in the terminal."
+							},
+							"path": {
+								"type": "string",
+								"description": "Starting path of the command."
+							}
+						}
+					}
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
