@@ -6,12 +6,12 @@ export function getCommands(): Command[] {
 }
 
 function getConfiguration(): unknown {
-    return vscode.workspace.getConfiguration().get('my-command-runner.commands');
+    return vscode.workspace.getConfiguration().get('run-command.commands');
 }
 
 function sanitizeConfiguration(configuration: any): Command[] {
     if (!Array.isArray(configuration)) {
-        vscode.window.showWarningMessage("my-command-runner.commands property must be an array of commands");
+        vscode.window.showWarningMessage("run-command.commands property must be an array of commands");
         return [];
     }
 

@@ -4,7 +4,7 @@ import { showCommandsPick } from './pick';
 import { executeCommand } from './terminal';
 
 export function activate(context: vscode.ExtensionContext) {
-	let commandRunner = vscode.commands.registerCommand('command-runner.run-command', runCommand);
+	let commandRunner = vscode.commands.registerCommand('run-command.run-command', runCommand);
 	context.subscriptions.push(commandRunner);
 }
 

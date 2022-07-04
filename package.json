@@ -1,7 +1,7 @@
 {
-	"name": "command-runner",
-	"displayName": "Command Runner",
-	"description": "Simple Command Runner for Visual Studio Code",
+	"name": "run-command",
+	"displayName": "Run Command",
+	"description": "Run Commands on Terminal for Visual Studio Code",
 	"version": "0.0.1",
 	"author": "Camillucci",
 	"publisher": "Camillucci",
@@ -12,28 +12,28 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:command-runner.run-command"
+		"onCommand:run-command.run-command"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "command-runner.run-command",
-				"title": "Command Runner: Run Command"
+				"command": "run-command.run-command",
+				"title": "Run Command..."
 			}
 		],
 		"keybindings": [
 			{
-				"command": "command-runner.run-command",
+				"command": "run-command.run-command",
 				"key": "ctrl+shift+t",
 				"mac": "ctrl+shift+t"
 			}
 		],
 		"configuration": {
 			"type": "object",
-			"title": "Command Runner Configuration",
+			"title": "Run Command Configuration",
 			"properties": {
-				"my-command-runner.commands": {
+				"run-command.commands": {
 					"type": "array",
 					"items": {
 						"type": [
