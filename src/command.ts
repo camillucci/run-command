@@ -1,5 +1,5 @@
 export interface Command {
-    command: string;
-    name?: string;
-    path?: string;
+  command: string;
+  name?: string;
+  path?: string;
 }
