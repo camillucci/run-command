@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { Command } from "./command";
-
-const DEFAULT_PATH: string = "${workspaceFolder}";
+import { DEFAULT_PATH } from "./constants";
 
 export async function executeCommand(command: Command): Promise<void> {
   const path = command.path ? command.path : DEFAULT_PATH;

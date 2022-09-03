@@ -1,25 +1,13 @@
 import * as vscode from "vscode";
 import { Command } from "./command";
+import { CONFIGURATION_NAME } from "./constants";
 
-const CONFIGURATION_NAME: string = "run-command.commands";
-
-export function getCommands(): Command[] {
-  return sanitizeConfiguration(getConfiguration());
+function isNotEmptyString(value: any): boolean {
+  return typeof value === "string" && value.trim().length > 0;
 }
 
-function getConfiguration(): unknown {
-  return vscode.workspace.getConfiguration().get(CONFIGURATION_NAME);
-}
-
-function sanitizeConfiguration(configuration: any): Command[] {
-  if (!Array.isArray(configuration)) {
-    vscode.window.showWarningMessage(
-      "run-command.commands property must be an array of commands"
-    );
-    return [];
-  }
-
-  return configurationList(configuration);
+function notEmptyStringOrUndefined(value: any): string | undefined {
+  return isNotEmptyString(value) ? (value as string).trim() : undefined;
 }
 
 function configurationList(configuration: any[]): Command[] {
@@ -35,10 +23,26 @@ function configurationList(configuration: any[]): Command[] {
     });
 }
 
-function isNotEmptyString(value: any): boolean {
-  return typeof value === "string" && value.trim().length > 0;
+function getConfiguration(): Command[] {
+  const config = vscode.workspace.getConfiguration().get(CONFIGURATION_NAME);
+
+  if (!Array.isArray(config)) {
+    vscode.window.showWarningMessage("The commands property must be an array");
+    return [];
+  }
+
+  return configurationList(config);
 }
 
-function notEmptyStringOrUndefined(value: any): string | undefined {
-  return isNotEmptyString(value) ? (value as string).trim() : undefined;
+export function getCommands(): Command[] {
+  return getConfiguration();
+}
+
+export async function updateConfiguration(newCommand: Command): Promise<void> {
+  const commands = getCommands();
+  commands.push(newCommand);
+
+  await vscode.workspace
+    .getConfiguration()
+    .update(CONFIGURATION_NAME, commands);
 }

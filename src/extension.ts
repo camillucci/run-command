@@ -1,15 +1,19 @@
 import * as vscode from "vscode";
 import { getCommands } from "./configuration";
-import { showCommandsPick } from "./pick";
+import { showCommandPicker } from "./picker";
 import { executeCommand } from "./terminal";
-import { addNewCommand } from "./manager";
+import { addNewCommand } from "./command-manger";
+import { ADD_NEW_COMMAND, COMMAND_NAME, STATUS_BAR_NAME } from "./constants";
 
-const COMMAND_NAME: string = "run-command.run-command";
-const STATUS_BAR_NAME: string = "$(terminal-view-icon) Run";
+async function runCommand() {
+  const commands = getCommands();
+  const pickedCommand = await showCommandPicker(commands);
 
-export function activate(context: vscode.ExtensionContext) {
-  addCommand(context);
-  addStatusBarItem(context);
+  if (pickedCommand?.command === ADD_NEW_COMMAND) {
+    await addNewCommand();
+  } else if (pickedCommand) {
+    executeCommand(pickedCommand);
+  }
 }
 
 function addCommand(context: vscode.ExtensionContext) {
@@ -32,13 +36,7 @@ function addStatusBarItem(context: vscode.ExtensionContext) {
   statusBarItem.show();
 }
 
-async function runCommand() {
-  const commands = getCommands();
-  const pickedCommand = await showCommandsPick(commands);
-
-  if (pickedCommand?.command === "") {
-    await addNewCommand();
-  } else if (pickedCommand) {
-    executeCommand(pickedCommand);
-  }
+export function activate(context: vscode.ExtensionContext) {
+  addCommand(context);
+  addStatusBarItem(context);
 }
