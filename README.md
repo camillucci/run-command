@@ -2,13 +2,15 @@
 
 This extension allows to create and run any command on the terminal.
 
-The `Run Command...` menu can be found in the Command Palette and in the Status Bar.
+It can be downloaded from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=camillucci.command-run).
 
 ## Features
 
 Create new commands with the `Add new command...` option in the `Run Command...` menu.
 
 Run commands from the `Run Command...` menu. A new terminal is spawn for each different command, which are then reutilized.
+
+The `Run Command...` menu can be found in the Command Palette and in the Status Bar.
 
 The configuration of commands can be modified in the vscode `settings.json` file.
 
