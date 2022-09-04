@@ -2,15 +2,27 @@
 	"name": "run-command",
 	"displayName": "Run Command",
 	"description": "Run Commands on Terminal for Visual Studio Code",
-	"version": "0.0.1",
-	"author": "Camillucci",
-	"publisher": "Camillucci",
+	"version": "1.0.0",
+	"icon": "img/icon.png",
+	"author": "camillucci",
+	"publisher": "camillucci",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/camillucci/run-command.git"
+	  },
 	"engines": {
 		"vscode": "^1.68.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"Terminal",
+		"Command",
+		"Commands",
+		"Run",
+		"Runner"
+	  ],
 	"activationEvents": [
 		"onStartupFinished"
 	],
