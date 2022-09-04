@@ -12,7 +12,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:run-command.run-command"
+		"onStartupFinished"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
