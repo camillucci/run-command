@@ -1,4 +1,4 @@
-# run-command README
+# Run Command Extension
 
 This extension allows to create and run any command on the terminal.
 
