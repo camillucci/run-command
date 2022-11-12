@@ -2,7 +2,7 @@
 
 This extension allows to create and run any command on the terminal.
 
-It can be downloaded from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=camillucci.command-run).
+It can be downloaded from the VSCode Marketplace [here](https://marketplace.visualstudio.com/items?itemName=camillucci.command-run).
 
 ## Features
 
