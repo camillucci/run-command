@@ -5,6 +5,10 @@ import { executeCommand } from "./terminal";
 import { addNewCommand } from "./command-manger";
 import { ADD_NEW_COMMAND, COMMAND_NAME, STATUS_BAR_NAME } from "./constants";
 
+/**
+ * Show the command picker.
+ * If a command is picked, execute it.
+ */
 async function runCommand() {
   const commands = getCommands();
   const pickedCommand = await showCommandPicker(commands);
@@ -16,6 +20,10 @@ async function runCommand() {
   }
 }
 
+/**
+ * Add this extension to VSCode command palette.
+ * @param context VSCode context.
+ */
 function addCommand(context: vscode.ExtensionContext) {
   const commandRunner = vscode.commands.registerCommand(
     COMMAND_NAME,
@@ -25,6 +33,10 @@ function addCommand(context: vscode.ExtensionContext) {
   context.subscriptions.push(commandRunner);
 }
 
+/**
+ * Add this extension to VSCode status bar.
+ * @param context VSCode context.
+ */
 function addStatusBarItem(context: vscode.ExtensionContext) {
   const statusBarItem = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Left
@@ -36,6 +48,10 @@ function addStatusBarItem(context: vscode.ExtensionContext) {
   statusBarItem.show();
 }
 
+/**
+ * Add this extension to VSCode.
+ * @param context VSCode context.
+ */
 export function activate(context: vscode.ExtensionContext) {
   addCommand(context);
   addStatusBarItem(context);
