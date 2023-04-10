@@ -1,4 +1,4 @@
-import * as vscode from "vscode";
+import { window, workspace } from "vscode";
 import { Command } from "./command";
 import { CONFIGURATION_NAME } from "./constants";
 
@@ -43,10 +43,10 @@ function configurationList(configuration: any[]): Command[] {
  * @returns The list of available commands.
  */
 export function getCommands(): Command[] {
-  const config = vscode.workspace.getConfiguration().get(CONFIGURATION_NAME);
+  const config = workspace.getConfiguration().get(CONFIGURATION_NAME);
 
   if (!Array.isArray(config)) {
-    vscode.window.showWarningMessage("The commands property must be an array");
+    window.showWarningMessage("The commands property must be an array");
     return [];
   }
 
@@ -61,7 +61,5 @@ export async function updateConfiguration(newCommand: Command): Promise<void> {
   const commands = getCommands();
   commands.push(newCommand);
 
-  await vscode.workspace
-    .getConfiguration()
-    .update(CONFIGURATION_NAME, commands);
+  await workspace.getConfiguration().update(CONFIGURATION_NAME, commands);
 }

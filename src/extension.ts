@@ -1,4 +1,4 @@
-import * as vscode from "vscode";
+import { ExtensionContext, StatusBarAlignment, commands, window } from "vscode";
 import { getCommands } from "./configuration";
 import { showCommandPicker } from "./picker";
 import { executeCommand } from "./terminal";
@@ -24,11 +24,8 @@ async function runCommand() {
  * Add this extension to VSCode command palette.
  * @param context VSCode context.
  */
-function addCommand(context: vscode.ExtensionContext) {
-  const commandRunner = vscode.commands.registerCommand(
-    COMMAND_NAME,
-    runCommand
-  );
+function addCommand(context: ExtensionContext) {
+  const commandRunner = commands.registerCommand(COMMAND_NAME, runCommand);
 
   context.subscriptions.push(commandRunner);
 }
@@ -37,10 +34,8 @@ function addCommand(context: vscode.ExtensionContext) {
  * Add this extension to VSCode status bar.
  * @param context VSCode context.
  */
-function addStatusBarItem(context: vscode.ExtensionContext) {
-  const statusBarItem = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Left
-  );
+function addStatusBarItem(context: ExtensionContext) {
+  const statusBarItem = window.createStatusBarItem(StatusBarAlignment.Left);
 
   statusBarItem.command = COMMAND_NAME;
   statusBarItem.text = STATUS_BAR_NAME;
@@ -52,7 +47,7 @@ function addStatusBarItem(context: vscode.ExtensionContext) {
  * Add this extension to VSCode.
  * @param context VSCode context.
  */
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
   addCommand(context);
   addStatusBarItem(context);
 }

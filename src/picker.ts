@@ -1,8 +1,8 @@
-import * as vscode from "vscode";
+import { QuickPickItem, window } from "vscode";
 import { Command } from "./command";
 import { ADD_NEW_COMMAND } from "./constants";
 
-interface CommandQuickPickerItem extends vscode.QuickPickItem {
+interface CommandQuickPickerItem extends QuickPickItem {
   command: Command;
 }
 
@@ -27,7 +27,7 @@ export async function showCommandPicker(commands: Command[]) {
   const pickerItems = getPickerItems(commands.filter((c) => c.command !== ""));
   pushAddNewCommand(pickerItems);
 
-  const picked = await vscode.window.showQuickPick(pickerItems, {
+  const picked = await window.showQuickPick(pickerItems, {
     matchOnDescription: true,
   });
 

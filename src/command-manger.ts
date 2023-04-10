@@ -1,4 +1,4 @@
-import * as vscode from "vscode";
+import { InputBoxOptions, window } from "vscode";
 import { Command } from "./command";
 import { updateConfiguration } from "./configuration";
 import { DEFAULT_PATH } from "./constants";
@@ -16,7 +16,7 @@ function inputBox(
   prompt: string,
   placeHolder: string,
   value?: string
-): vscode.InputBoxOptions {
+): InputBoxOptions {
   return {
     title: title,
     prompt: prompt,
@@ -29,7 +29,7 @@ function inputBox(
  * Return the input box for the `command.command`.
  * @returns The input box for the `command.command`.
  */
-function commandInputBox(): vscode.InputBoxOptions {
+function commandInputBox(): InputBoxOptions {
   return inputBox("Command", "Command", "Command");
 }
 
@@ -38,7 +38,7 @@ function commandInputBox(): vscode.InputBoxOptions {
  * @param defaultNameValue The default value to pre-fill in the input box.
  * @returns The input box for the `command.name`.
  */
-function nameInputBox(defaultNameValue: string): vscode.InputBoxOptions {
+function nameInputBox(defaultNameValue: string): InputBoxOptions {
   return inputBox("Name", "Name", "Name", defaultNameValue);
 }
 
@@ -46,7 +46,7 @@ function nameInputBox(defaultNameValue: string): vscode.InputBoxOptions {
  * Returns the input box for the `command.path`.
  * @returns The input box for the `command.path`.
  */
-function pathInputBox(): vscode.InputBoxOptions {
+function pathInputBox(): InputBoxOptions {
   return inputBox("Path", "Path", "Path", DEFAULT_PATH);
 }
 
@@ -74,17 +74,17 @@ function createNewCommand(command: string, name: string, path: string) {
  * @returns The completion of the operation.
  */
 export async function addNewCommand(): Promise<void> {
-  const command = await vscode.window.showInputBox(commandInputBox());
+  const command = await window.showInputBox(commandInputBox());
   if (command === undefined || command.trim().length === 0) {
     return;
   }
 
-  const name = await vscode.window.showInputBox(nameInputBox(command));
+  const name = await window.showInputBox(nameInputBox(command));
   if (!name) {
     return;
   }
 
-  const path = await vscode.window.showInputBox(pathInputBox());
+  const path = await window.showInputBox(pathInputBox());
   if (!path) {
     return;
   }
