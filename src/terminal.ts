@@ -2,14 +2,34 @@ import { Terminal, window } from "vscode";
 import { Command } from "./command";
 import { DEFAULT_PATH } from "./constants";
 
+/**
+ * Find, if it exists, a terminal with the given command name.
+ * @param command The command to search.
+ * @returns The found terminal, if any.
+ */
 function findTerminal(command: Command): Terminal | undefined {
-  return window.terminals.find((t) => t.name === command.name);
+  const name = command.name ?? command.command;
+  return window.terminals.find((t) => t.name === name);
 }
 
-function getTerminal(command: Command): Terminal {
-  const path = command.path ? command.path : DEFAULT_PATH;
-  let terminal = findTerminal(command);
-  return terminal ?? window.createTerminal({ name: command.name, cwd: path });
+/**
+ * Dispose,if it exists, a terminal with the given command name.
+ * @param command The terminal to dispose.
+ */
+function disposeTerminal(command: Command): void {
+  const terminal = findTerminal(command);
+  terminal?.dispose();
+}
+
+/**
+ * Create a new terminal with the given command name.
+ * @param command Command to execute.
+ * @returns The newly created terminal.
+ */
+function createTerminal(command: Command): Terminal {
+  const name = command.name ?? command.command;
+  const path = command.path ?? DEFAULT_PATH;
+  return window.createTerminal({ name: name, cwd: path });
 }
 
 /**
@@ -18,7 +38,8 @@ function getTerminal(command: Command): Terminal {
  * @param command The command to execute.
  */
 export async function executeCommand(command: Command): Promise<void> {
-  const terminal = getTerminal(command);
+  disposeTerminal(command);
+  const terminal = createTerminal(command);
   terminal.show();
   terminal.sendText(command.command);
 }
