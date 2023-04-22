@@ -9,7 +9,7 @@ import { ADD_NEW_COMMAND, COMMAND_NAME, STATUS_BAR_NAME } from "./constants";
  * Show the command picker.
  * If a command is picked, execute it.
  */
-async function runCommand() {
+async function runCommand(): Promise<void> {
   const commands = getCommands();
   const pickedCommand = await showCommandPicker(commands);
 
@@ -24,7 +24,7 @@ async function runCommand() {
  * Add this extension to VSCode command palette.
  * @param context VSCode context.
  */
-function addCommand(context: ExtensionContext) {
+function addCommand(context: ExtensionContext): void {
   const commandRunner = commands.registerCommand(COMMAND_NAME, runCommand);
 
   context.subscriptions.push(commandRunner);
@@ -34,7 +34,7 @@ function addCommand(context: ExtensionContext) {
  * Add this extension to VSCode status bar.
  * @param context VSCode context.
  */
-function addStatusBarItem(context: ExtensionContext) {
+function addStatusBarItem(context: ExtensionContext): void {
   const statusBarItem = window.createStatusBarItem(StatusBarAlignment.Left);
 
   statusBarItem.command = COMMAND_NAME;
@@ -47,7 +47,7 @@ function addStatusBarItem(context: ExtensionContext) {
  * Add this extension to VSCode.
  * @param context VSCode context.
  */
-export function activate(context: ExtensionContext) {
+export function activate(context: ExtensionContext): void {
   addCommand(context);
   addStatusBarItem(context);
 }

@@ -57,7 +57,11 @@ function pathInputBox(): InputBoxOptions {
  * @param path The command path.
  * @returns The newly created command.
  */
-function createNewCommand(command: string, name: string, path: string) {
+function createNewCommand(
+  command: string,
+  name: string,
+  path: string
+): Command {
   const newCommand: Command = {
     command: command.trim(),
     name: name.trim().length !== 0 ? name.trim() : command,
