@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added prettier and eslint configurations.
 - Added terminal disposal to reset starting path.
+- Added tests.
 
 ## [1.0.0] - 2022-09-04
 
