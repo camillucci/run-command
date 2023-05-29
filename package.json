@@ -2,7 +2,7 @@
 	"name": "command-run",
 	"displayName": "Run Command",
 	"description": "Run Commands on Terminal for Visual Studio Code",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"icon": "img/icon.png",
 	"author": "camillucci",
 	"publisher": "camillucci",
