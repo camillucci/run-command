@@ -47,3 +47,17 @@ export function nameInputBox(defaultNameValue: string): InputBoxOptions {
 export function pathInputBox(): InputBoxOptions {
   return inputBox("Path", "Path", "Path", DEFAULT_PATH);
 }
+
+/**
+ * Returns the input box for one of the `command.parameters`.
+ * @param index The number of the current parameter.
+ * @returns The input box for one of the `command.parameters`.
+ */
+export function parameterInputBox(index: number): InputBoxOptions {
+  return inputBox(
+    `Parameter ${index}`,
+    "Press Enter to end parameter list",
+    `Parameter ${index}`
+  );
+}
+

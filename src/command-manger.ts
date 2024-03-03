@@ -2,7 +2,12 @@ import { window } from "vscode";
 import { Command } from "./command";
 import { updateConfiguration } from "./configuration";
 import { DEFAULT_PATH } from "./constants";
-import { commandInputBox, nameInputBox, pathInputBox } from "./input-boxes";
+import {
+  commandInputBox,
+  nameInputBox,
+  parameterInputBox,
+  pathInputBox,
+} from "./input-boxes";
 
 /**
  * Create a new command.
@@ -14,12 +19,14 @@ import { commandInputBox, nameInputBox, pathInputBox } from "./input-boxes";
 function createNewCommand(
   command: string,
   name: string,
-  path: string
+  path: string,
+  parameters: string[]
 ): Command {
   const newCommand: Command = {
     command: command.trim(),
     name: name.trim().length !== 0 ? name.trim() : command,
     path: path.trim().length !== 0 ? path.trim() : DEFAULT_PATH,
+    parameters: parameters,
   };
 
   return newCommand;
@@ -47,6 +54,15 @@ export async function addNewCommand(): Promise<void> {
     return;
   }
 
-  const newCommand = createNewCommand(command, name, path);
+  const parameters: string[] = [];
+  let parameter = await window.showInputBox(parameterInputBox(1));
+  while (parameter) {
+    parameters.push(parameter.trim());
+    parameter = await window.showInputBox(
+      parameterInputBox(parameters.length + 1)
+    );
+  }
+
+  const newCommand = createNewCommand(command, name, path, parameters);
   updateConfiguration(newCommand);
 }
