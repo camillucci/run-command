@@ -21,6 +21,17 @@ function notEmptyStringOrUndefined(value: any): string | undefined {
 }
 
 /**
+ * Get the given list with trimmed parameters, or undefined if not possible.
+ * @param value The array to check and trim.
+ * @returns The trimmed given list or undefined.
+ */
+function notEmptyArrayOrUndefined(value: any): string[] | undefined {
+  return Array.isArray(value)
+    ? value.filter((val) => notEmptyStringOrUndefined(val))
+    : undefined;
+}
+
+/**
  * Get all available commands from the VSCode configuration.
  * @param configuration VSCode configuration of this extension.
  * @returns The list of available commands.
@@ -32,8 +43,9 @@ function configurationList(configuration: any[]): Command[] {
       const command = maybeCommand as Command;
       return {
         command: command.command,
-        name: notEmptyStringOrUndefined(maybeCommand.name),
+        name: notEmptyStringOrUndefined(command.name),
         path: notEmptyStringOrUndefined(command.path),
+        parameters: notEmptyArrayOrUndefined(command.parameters),
       };
     });
 }
