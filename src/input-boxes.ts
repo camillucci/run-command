@@ -61,3 +61,15 @@ export function parameterInputBox(index: number): InputBoxOptions {
   );
 }
 
+/**
+ * Returns the input box for one of the `command.parameters`.
+ * @param index The number of the current parameter.
+ * @returns The input box for one of the `command.parameters`.
+ */
+export function valueInputBox(parameter: string): InputBoxOptions {
+  return inputBox(
+    `${parameter} value`,
+    `${parameter} value`,
+    `${parameter} value`
+  );
+}
