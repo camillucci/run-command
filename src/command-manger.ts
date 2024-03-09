@@ -45,22 +45,25 @@ export async function addNewCommand(): Promise<void> {
   }
 
   const name = await window.showInputBox(nameInputBox(command));
-  if (!name) {
+  if (name === undefined) {
     return;
   }
 
   const path = await window.showInputBox(pathInputBox());
-  if (!path) {
+  if (path === undefined) {
     return;
   }
 
   const parameters: string[] = [];
   let parameter = await window.showInputBox(parameterInputBox(1));
-  while (parameter) {
+  while (parameter?.trim()) {
     parameters.push(parameter.trim());
     parameter = await window.showInputBox(
       parameterInputBox(parameters.length + 1)
     );
+  }
+  if (parameter === undefined) {
+    return;
   }
 
   const newCommand = createNewCommand(command, name, path, parameters);

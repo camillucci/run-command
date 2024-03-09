@@ -37,7 +37,12 @@ export function commandInputBox(): InputBoxOptions {
  * @returns The input box for the `command.name`.
  */
 export function nameInputBox(defaultNameValue: string): InputBoxOptions {
-  return inputBox("Name", "Name", "Name", defaultNameValue);
+  return inputBox(
+    "Name",
+    "Name of the command",
+    "Name of the command",
+    defaultNameValue
+  );
 }
 
 /**
@@ -45,7 +50,7 @@ export function nameInputBox(defaultNameValue: string): InputBoxOptions {
  * @returns The input box for the `command.path`.
  */
 export function pathInputBox(): InputBoxOptions {
-  return inputBox("Path", "Path", "Path", DEFAULT_PATH);
+  return inputBox("Path", "Execution Path", "Execution Path", DEFAULT_PATH);
 }
 
 /**
@@ -54,10 +59,18 @@ export function pathInputBox(): InputBoxOptions {
  * @returns The input box for one of the `command.parameters`.
  */
 export function parameterInputBox(index: number): InputBoxOptions {
+  if (index === 1) {
+    return inputBox(
+      `Parameter${index}`,
+      `Parameter${index} name, leave empty for no parameters`,
+      `Parameter${index}`
+    );
+  }
+
   return inputBox(
-    `Parameter ${index}`,
-    "Press Enter to end parameter list",
-    `Parameter ${index}`
+    `Parameter${index}`,
+    `Parameter${index} name, leave empty to end parameter list`,
+    `Parameter${index}`
   );
 }
 
@@ -68,8 +81,8 @@ export function parameterInputBox(index: number): InputBoxOptions {
  */
 export function valueInputBox(parameter: string): InputBoxOptions {
   return inputBox(
+    `${parameter}`,
     `${parameter} value`,
-    `${parameter} value`,
-    `${parameter} value`
+    `${parameter}`
   );
 }
