@@ -12,8 +12,9 @@ import {
 /**
  * Create a new command.
  * @param command The command command.
- * @param name The command name.
- * @param path The command path.
+ * @param name The optional command name.
+ * @param path The optional command path.
+ * @param parameters The optional command parameters.
  * @returns The newly created command.
  */
 function createNewCommand(
@@ -26,16 +27,16 @@ function createNewCommand(
     command: command.trim(),
     name: name.trim().length !== 0 ? name.trim() : command,
     path: path.trim().length !== 0 ? path.trim() : DEFAULT_PATH,
-    parameters: parameters,
+    parameters: parameters ?? [],
   };
 
   return newCommand;
 }
 
 /**
- * Show the three input boxes to decide the command, name and path of the new
- * command. If all three are chosen, create the new command and update Visual
- * Studio Code configuration.
+ * Show input boxes to decide command, name, path and parameters of the new
+ * command. If all four are chosen, or default values are used, create a new
+ * command and update Visual Studio Code configuration.
  * @returns The completion of the operation.
  */
 export async function addNewCommand(): Promise<void> {

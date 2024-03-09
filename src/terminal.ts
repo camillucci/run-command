@@ -53,6 +53,7 @@ async function getParametrizedCommand(command: Command): Promise<Command> {
 
 /**
  * Create a new terminal if one with the `command.name` is not available.
+ * Ask the user for `command.parameters` and replace them in the command.
  * Execute the `command.command` from the `command.path` in the terminal.
  * @param command The command to execute.
  */
