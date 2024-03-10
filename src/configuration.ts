@@ -1,6 +1,6 @@
 import { window, workspace } from "vscode";
-import { Command } from "./command";
-import { CONFIGURATION_NAME, DEFAULT_PATH } from "./constants";
+import { Command, cleanCommand } from "./command";
+import { CONFIGURATION_NAME } from "./constants";
 
 /**
  * Check if an object is a non empty string.
@@ -63,27 +63,6 @@ export function getCommands(): Command[] {
   }
 
   return configurationList(config);
-}
-
-/**
- * Removed from a given command all the default values.
- * @param command The command to clean from default values.
- * @returns The cleaned command.
- */
-function cleanCommand(command: Command): Command {
-  if (command.command === command.name) {
-    command.name = undefined;
-  }
-
-  if (command.path === DEFAULT_PATH) {
-    command.path = undefined;
-  }
-
-  if (command.parameters?.length === 0) {
-    command.parameters = undefined;
-  }
-
-  return command;
 }
 
 /**
