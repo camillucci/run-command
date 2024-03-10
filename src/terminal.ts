@@ -39,7 +39,7 @@ function createTerminal(command: Command): Terminal {
  * @returns Command with value inserted by the user.
  */
 async function getParametrizedCommand(
-  command: Command
+  command: Command,
 ): Promise<Command | undefined> {
   command.name ??= command.command;
   for (let parameter of command.parameters ?? []) {

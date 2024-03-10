@@ -21,7 +21,7 @@ function createNewCommand(
   command: string,
   name: string,
   path: string,
-  parameters: string[]
+  parameters: string[],
 ): Command {
   const newCommand: Command = {
     command: command.trim(),
@@ -60,7 +60,7 @@ export async function addNewCommand(): Promise<void> {
   while (parameter?.trim()) {
     parameters.push(parameter.trim());
     parameter = await window.showInputBox(
-      parameterInputBox(parameters.length + 1)
+      parameterInputBox(parameters.length + 1),
     );
   }
   if (parameter === undefined) {

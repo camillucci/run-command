@@ -4,8 +4,8 @@
   "useTabs": false,
   "semi": true,
   "singleQuote": false,
-  "quoteProps": "as-needed",
-  "trailingComma": "es5",
+  "quoteProps": "consistent",
+  "trailingComma": "all",
   "bracketSpacing": true,
   "arrowParens": "always",
   "endOfLine": "lf"
