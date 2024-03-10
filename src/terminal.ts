@@ -38,14 +38,16 @@ function createTerminal(command: Command): Terminal {
  * @param command with parameters to be replaced.
  * @returns Command with value inserted by the user.
  */
-async function getParametrizedCommand(command: Command): Promise<Command> {
-  if (!command.parameters) {
-    return command;
-  }
-
-  for (let parameter of command.parameters) {
+async function getParametrizedCommand(
+  command: Command
+): Promise<Command | undefined> {
+  command.name ??= command.command;
+  for (let parameter of command.parameters ?? []) {
     const value = await window.showInputBox(valueInputBox(parameter));
-    command.command = command.command.replace(parameter, value ?? "");
+    if (value === undefined) {
+      return;
+    }
+    command.command = command.command.replace(parameter, value);
   }
 
   return command;
@@ -58,9 +60,13 @@ async function getParametrizedCommand(command: Command): Promise<Command> {
  * @param command The command to execute.
  */
 export async function executeCommand(command: Command): Promise<void> {
+  const parametrizedCommand = await getParametrizedCommand(command);
+  if (!parametrizedCommand) {
+    return;
+  }
+
   disposeTerminal(command);
   const terminal = createTerminal(command);
-  const parametrizedCommand = await getParametrizedCommand(command);
   terminal.show();
   terminal.sendText(parametrizedCommand.command);
 }
