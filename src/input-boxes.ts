@@ -2,33 +2,11 @@ import { InputBoxOptions } from "vscode";
 import { DEFAULT_PATH } from "./constants";
 
 /**
- * Return a custom input box for inserting a new command.
- * @param title The title of the input box.
- * @param prompt The text to display underneath the input box.
- * @param placeHolder A placeholder in the input box.
- * @param value The value to pre-fill in the input box.
- * @returns
- */
-function inputBox(
-  title: string,
-  prompt: string,
-  placeHolder: string,
-  value?: string
-): InputBoxOptions {
-  return {
-    title: title,
-    prompt: prompt,
-    placeHolder: placeHolder,
-    value: value,
-  };
-}
-
-/**
  * Return the input box for the `command.command`.
  * @returns The input box for the `command.command`.
  */
 export function commandInputBox(): InputBoxOptions {
-  return inputBox("Command", "Command", "Command");
+  return { title: "Command", placeHolder: "Command", prompt: "Command" };
 }
 
 /**
@@ -37,7 +15,12 @@ export function commandInputBox(): InputBoxOptions {
  * @returns The input box for the `command.name`.
  */
 export function nameInputBox(defaultNameValue: string): InputBoxOptions {
-  return inputBox("Name", "Name of the command", "Name", defaultNameValue);
+  return {
+    title: "Name",
+    placeHolder: "Name",
+    prompt: "Name of the command",
+    value: defaultNameValue,
+  };
 }
 
 /**
@@ -45,7 +28,12 @@ export function nameInputBox(defaultNameValue: string): InputBoxOptions {
  * @returns The input box for the `command.path`.
  */
 export function pathInputBox(): InputBoxOptions {
-  return inputBox("Path", "Execution Path", "Path", DEFAULT_PATH);
+  return {
+    title: "Path",
+    placeHolder: "Path",
+    prompt: "Execution Path",
+    value: DEFAULT_PATH,
+  };
 }
 
 /**
@@ -59,7 +47,11 @@ export function parameterInputBox(index: number): InputBoxOptions {
       ? `Parameter${index} name, leave empty for no parameters`
       : `Parameter${index} name, leave empty to end parameter list`;
 
-  return inputBox(`Parameter${index}`, promptMessage, `Parameter${index}`);
+  return {
+    title: `Parameter${index}`,
+    placeHolder: `Parameter${index}`,
+    prompt: promptMessage,
+  };
 }
 
 /**
@@ -68,5 +60,9 @@ export function parameterInputBox(index: number): InputBoxOptions {
  * @returns The input box for one of the `command.parameters`.
  */
 export function valueInputBox(parameter: string): InputBoxOptions {
-  return inputBox(`${parameter}`, `${parameter} value`, `${parameter}`);
+  return {
+    title: `${parameter}`,
+    placeHolder: `${parameter}`,
+    prompt: `${parameter} value`,
+  };
 }
