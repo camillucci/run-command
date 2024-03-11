@@ -72,6 +72,5 @@ export function getCommands(): Command[] {
 export async function updateConfiguration(newCommand: Command): Promise<void> {
   const commands = getCommands();
   commands.push(cleanCommand(newCommand));
-
   await workspace.getConfiguration().update(CONFIGURATION_NAME, commands);
 }

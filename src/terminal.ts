@@ -42,6 +42,7 @@ async function getParametrizedCommand(
   command: Command,
 ): Promise<Command | undefined> {
   command.name ??= command.command;
+
   for (let parameter of command.parameters ?? []) {
     const value = await window.showInputBox(valueInputBox(parameter));
     if (value === undefined) {

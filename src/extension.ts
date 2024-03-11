@@ -26,7 +26,6 @@ async function runCommand(): Promise<void> {
  */
 function addCommand(context: ExtensionContext): void {
   const commandRunner = commands.registerCommand(COMMAND_NAME, runCommand);
-
   context.subscriptions.push(commandRunner);
 }
 
@@ -36,7 +35,6 @@ function addCommand(context: ExtensionContext): void {
  */
 function addStatusBarItem(context: ExtensionContext): void {
   const statusBarItem = window.createStatusBarItem(StatusBarAlignment.Left);
-
   statusBarItem.command = COMMAND_NAME;
   statusBarItem.text = STATUS_BAR_NAME;
   context.subscriptions.push(statusBarItem);
