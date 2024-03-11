@@ -23,3 +23,4 @@ This extension contributes the following settings:
   - `command`: shell code to be executed.
   - `name`: optional name of the command.
   - `path`: optional starting path of the terminal.
+  - `parameters`: optional list of parameter to be specified by the user when running the command.
