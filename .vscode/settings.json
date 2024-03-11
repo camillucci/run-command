@@ -18,6 +18,10 @@
             "name": "Npm Update"
         },
         {
+            "command": "npm run test",
+            "name": "Npm Tests"
+        },
+        {
             "command": "vsce publish minor",
             "name": "Publish Extension"
         }
