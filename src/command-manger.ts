@@ -1,80 +1,42 @@
-import { InputBoxOptions, window } from "vscode";
+import { window } from "vscode";
 import { Command } from "./command";
 import { updateConfiguration } from "./configuration";
 import { DEFAULT_PATH } from "./constants";
-
-/**
- * Return a custom input box for inserting a new command.
- * @param title The title of the input box.
- * @param prompt The text to display underneath the input box.
- * @param placeHolder A placeholder in the input box.
- * @param value The value to pre-fill in the input box.
- * @returns
- */
-function inputBox(
-  title: string,
-  prompt: string,
-  placeHolder: string,
-  value?: string
-): InputBoxOptions {
-  return {
-    title: title,
-    prompt: prompt,
-    placeHolder: placeHolder,
-    value: value,
-  };
-}
-
-/**
- * Return the input box for the `command.command`.
- * @returns The input box for the `command.command`.
- */
-function commandInputBox(): InputBoxOptions {
-  return inputBox("Command", "Command", "Command");
-}
-
-/**
- * Returns the input box for the `command.name`.
- * @param defaultNameValue The default value to pre-fill in the input box.
- * @returns The input box for the `command.name`.
- */
-function nameInputBox(defaultNameValue: string): InputBoxOptions {
-  return inputBox("Name", "Name", "Name", defaultNameValue);
-}
-
-/**
- * Returns the input box for the `command.path`.
- * @returns The input box for the `command.path`.
- */
-function pathInputBox(): InputBoxOptions {
-  return inputBox("Path", "Path", "Path", DEFAULT_PATH);
-}
+import {
+  commandInputBox,
+  nameInputBox,
+  parameterInputBox,
+  pathInputBox,
+} from "./input-boxes";
 
 /**
  * Create a new command.
  * @param command The command command.
- * @param name The command name.
- * @param path The command path.
+ * @param name The optional command name.
+ * @param path The optional command path.
+ * @param parameters The optional command parameters.
  * @returns The newly created command.
  */
 function createNewCommand(
   command: string,
   name: string,
-  path: string
+  path: string,
+  parameters: string[],
 ): Command {
   const newCommand: Command = {
     command: command.trim(),
     name: name.trim().length !== 0 ? name.trim() : command,
     path: path.trim().length !== 0 ? path.trim() : DEFAULT_PATH,
+    parameters: parameters ?? [],
   };
 
   return newCommand;
 }
 
 /**
- * Show the three input boxes to decide the command, name and path of the new
- * command. If all three are chosen, create the new command and update Visual
- * Studio Code configuration.
+ * Show input boxes to decide command, name, path and parameters of the new
+ * command. If all four are chosen, or default values are used, create a new
+ * command and update Visual Studio Code configuration.
  * @returns The completion of the operation.
  */
 export async function addNewCommand(): Promise<void> {
@@ -84,15 +46,27 @@ export async function addNewCommand(): Promise<void> {
   }
 
   const name = await window.showInputBox(nameInputBox(command));
-  if (!name) {
+  if (name === undefined) {
     return;
   }
 
   const path = await window.showInputBox(pathInputBox());
-  if (!path) {
+  if (path === undefined) {
     return;
   }
 
-  const newCommand = createNewCommand(command, name, path);
+  const parameters: string[] = [];
+  let parameter = await window.showInputBox(parameterInputBox(1));
+  while (parameter?.trim()) {
+    parameters.push(parameter.trim());
+    parameter = await window.showInputBox(
+      parameterInputBox(parameters.length + 1),
+    );
+  }
+  if (parameter === undefined) {
+    return;
+  }
+
+  const newCommand = createNewCommand(command, name, path, parameters);
   updateConfiguration(newCommand);
 }

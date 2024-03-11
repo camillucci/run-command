@@ -38,7 +38,7 @@ function pushAddNewCommand(pickItems: CommandQuickPickerItem[]): void {
  * @returns The command picked by the user.
  */
 export async function showCommandPicker(
-  commands: Command[]
+  commands: Command[],
 ): Promise<Command | undefined> {
   const pickerItems = getPickerItems(commands.filter((c) => c.command !== ""));
   pushAddNewCommand(pickerItems);

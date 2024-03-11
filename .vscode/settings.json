@@ -7,5 +7,23 @@
         "out": true // set this to false to include "out" folder in search results
     },
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-    "typescript.tsc.autoDetect": "off"
+    "typescript.tsc.autoDetect": "off",
+    "run-command.commands": [
+        {
+            "command": "npm run prettier",
+            "name": "Run Prettier"
+        },
+        {
+            "command": "npm update --save",
+            "name": "Npm Update"
+        },
+        {
+            "command": "npm run test",
+            "name": "Npm Tests"
+        },
+        {
+            "command": "vsce publish minor",
+            "name": "Publish Extension"
+        }
+    ]
 }
