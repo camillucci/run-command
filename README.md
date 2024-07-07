@@ -24,3 +24,36 @@ This extension contributes the following settings:
   - `name`: optional name of the command.
   - `path`: optional starting path of the terminal.
   - `parameters`: optional list of parameter to be specified by the user when running the command.
+
+## Examples
+
+- Basic command that will run on the workspace folder:
+
+  ```json
+  {
+      "command": "npm install"
+  }
+  ```
+
+- Command with a custom name that will run on the specified folder:
+
+  ```json
+  {
+      "command": "npm install",
+      "name": "Install node modules",
+      "path": "${workspaceFolder}/src"
+  }
+  ```
+
+- Command with parameters that will be replaced when the command is run:
+
+  ```json
+  {
+      "command": "npm install newModuleName",
+      "name": "Install new node module",
+      "path": "${workspaceFolder}/src",
+      "parameters": [
+          "newModuleName"
+      ]
+  }
+  ```
