@@ -1,5 +1,9 @@
 # Run Command VS Code Extension
 
+![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/camillucci.command-run)
+![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/camillucci.command-run)
+![GitHub License](https://img.shields.io/github/license/camillucci/run-command)
+
 This extension allows to create and run any command on the terminal.
 
 It can be downloaded from [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=camillucci.command-run).
