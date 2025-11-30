@@ -1,96 +1,96 @@
 {
-	"name": "command-run",
-	"displayName": "Run Command",
-	"description": "Run Commands on Terminal for Visual Studio Code",
-	"version": "1.4.1",
-	"icon": "img/icon.png",
-	"author": "camillucci",
-	"publisher": "camillucci",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/camillucci/run-command.git"
-	},
-	"engines": {
-		"vscode": "^1.91.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"keywords": [
-		"Terminal",
-		"Command",
-		"Commands",
-		"Run",
-		"Runner"
-	],
-	"activationEvents": [
-		"onStartupFinished"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "run-command.run-command",
-				"title": "Run Command..."
-			}
-		],
-		"keybindings": [
-			{
-				"command": "run-command.run-command",
-				"key": "ctrl+shift+t",
-				"mac": "ctrl+shift+t"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Run Command Configuration",
-			"properties": {
-				"run-command.commands": {
-					"type": "array",
-					"items": {
-						"type": [
-							"object"
-						],
-						"properties": {
-							"name": {
-								"type": "string",
-								"description": "Name for the command and of the terminal."
-							},
-							"command": {
-								"type": "string",
-								"description": "The command to be executed in the terminal."
-							},
-							"path": {
-								"type": "string",
-								"description": "Starting path of the command."
-							}
-						}
-					}
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js",
-		"prettier": "prettier --write ./src"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.2.0",
-		"@types/mocha": "^10.0.10",
-		"@types/node": "^24.10.1",
-		"@types/vscode": "^1.106.1",
-		"@typescript-eslint/eslint-plugin": "^8.48.0",
-		"@typescript-eslint/parser": "^8.48.0",
-		"@vscode/test-electron": "^2.5.2",
-		"eslint": "^9.39.1",
-		"glob": "^13.0.0",
-		"mocha": "^11.7.5",
-		"prettier": "^3.7.2",
-		"typescript": "^5.9.3"
-	}
+  "name": "command-run",
+  "displayName": "Run Command",
+  "description": "Run Commands on Terminal for Visual Studio Code",
+  "version": "1.4.1",
+  "icon": "img/icon.png",
+  "author": "camillucci",
+  "publisher": "camillucci",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/camillucci/run-command.git"
+  },
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "Terminal",
+    "Command",
+    "Commands",
+    "Run",
+    "Runner"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "run-command.run-command",
+        "title": "Run Command..."
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "run-command.run-command",
+        "key": "ctrl+shift+t",
+        "mac": "ctrl+shift+t"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Run Command Configuration",
+      "properties": {
+        "run-command.commands": {
+          "type": "array",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name for the command and of the terminal."
+              },
+              "command": {
+                "type": "string",
+                "description": "The command to be executed in the terminal."
+              },
+              "path": {
+                "type": "string",
+                "description": "Starting path of the command."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "prettier": "prettier --write ./src"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.10.1",
+    "@types/vscode": "^1.91.0",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.1",
+    "glob": "^13.0.0",
+    "mocha": "^11.7.5",
+    "prettier": "^3.7.2",
+    "typescript": "^5.9.3"
+  }
 }
