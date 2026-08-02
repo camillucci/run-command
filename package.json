@@ -11,7 +11,7 @@
     "url": "https://github.com/camillucci/run-command.git"
   },
   "engines": {
-    "vscode": "^1.91.0"
+    "vscode": "^1.125.0"
   },
   "categories": [
     "Other"
@@ -81,15 +81,15 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
-    "@types/node": "^26.1.0",
-    "@types/vscode": "^1.91.0",
-    "@typescript-eslint/eslint-plugin": "^8.62.1",
-    "@typescript-eslint/parser": "^8.48.0",
-    "@vscode/test-electron": "^3.0.0",
-    "eslint": "^10.6.0",
+    "@types/node": "^26.1.2",
+    "@types/vscode": "^1.125.0",
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
+    "@vscode/test-electron": "^3.1.0",
+    "eslint": "^10.8.0",
     "glob": "^13.0.6",
     "mocha": "^11.7.6",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.6",
     "typescript": "^6.0.3"
   }
 }
